@@ -1,0 +1,80 @@
+body {
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: black;
+}
+
+.qube-perspective {
+	perspective: 100vw;
+}
+
+.sbnn-cube {
+	width: 40vh;
+	height: 40vh;
+	transition: transform 1500ms ease;
+	transform: rotateY(359deg);
+	animation: spin-along-y linear infinite 10s;
+}
+
+.sbnn-cube > * {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	font-size: 15vw;
+	font-family: "Futura";
+}
+
+.qube {
+	color: white;
+	position: relative;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	width: 100%;
+	height: 100%;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+.qube > *,
+.qube > *:after {
+	backface-visibility: hidden;
+	-webkit-backface-visibility: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.qube > .front {
+	/* This is the real breakthrough: We can't just translateZ(-100%) because Z has no dimension value for calculating a percentage, however we can be sneaky and rotate such that we can translate on an axis that *does* have real dimensions, and then we can rotate back! */
+	transform: rotateX(90deg) rotateX(-90deg);
+}
+
+.qube > .back {
+	transform: rotateY(180deg) rotateX(90deg) rotateX(-90deg);
+}
+
+.qube > *:after {
+	pointer-events: none; /* Prevent shadows from interfering with DOM mouse/touch events */
+	display: block;
+	content: "";
+}
+
+@keyframes spin-along-y {
+    from {
+        transform: rotateY(0);
+    }
+    to {
+        transform: rotateY(-359.99deg);
+    }
+}
