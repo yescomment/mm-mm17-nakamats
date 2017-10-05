@@ -29,6 +29,11 @@ body {
 	font-family: "Futura";
 }
 
+.qube img {
+	min-width: 70vw;
+	max-height: 60vh;
+}
+
 .qube {
 	color: white;
 	position: relative;
